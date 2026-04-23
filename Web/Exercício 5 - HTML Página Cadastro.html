@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="description" content="Este é um site inicial da turma de ciências da Computação" />
+    <meta name="keywords" content="exercicio,aulaURI, primeiro html" />
+    <title>
+        Exercício 5 - João Vitor Azambuja
+    </title>
+    <link href="style.css" rel="stylesheet" />
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .card {
+            width: 100%;
+            max-width: 380px;
+            background: #fff;
+            padding: 28px;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, .08);
+        }
+
+        h1 {
+            margin: 0 0 20px;
+            font-size: 28px;
+            text-align: center;
+        }
+
+        form {
+            display: grid;
+            gap: 14px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 600;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #cfd6dd;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        button {
+            border: 0;
+            background: #2563eb;
+            color: #fff;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .erro {
+            margin-top: 14px;
+            color: #b91c1c;
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            padding: 10px 12px;
+            border-radius: 8px;
+            font-size: 14px;
+            display: none;
+        }
+
+        .sucesso {
+            margin-top: 14px;
+            color: #166534;
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            padding: 10px 12px;
+            border-radius: 8px;
+            font-size: 14px;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <main class="card">
+        <h1>Cadastro</h1>
+        <form onsubmit="enviarForm(event)">
+            <div>
+                <label for="name">Nome Completo</label>
+                <input type="text" id="name" name="name" placeholder="Digite seu Nome Completo" />
+            </div>
+            <div>
+                <label for="phone">Telefone</label>
+                <input type="text" id="phone" name="phone" placeholder="00 00000-0000" />
+            </div>
+            <div>
+                <label for="email">Email</label>
+                <input type="text" id="email" name="email" placeholder="Digite seu email" />
+            </div>
+            <div>
+                <label for="cep">CEP</label>
+                <input type="text" id="cep" name="cep" placeholder="00000-000" />
+            </div>
+            <div>
+                <label for="senha">Senha</label>
+                <input type="password" id="senha" name="senha" placeholder="Digite sua senha" />
+            </div>
+            <div>
+                <label for="senhaAlt">Confirmação de Senha</label>
+                <input type="password" id="senhaAlt" name="senhaAlt" placeholder="Digite sua senha novamente" />
+            </div>
+            <button type="submit">Cadastrar</button>
+        </form>
+        <div class="erro" id="mensagemErro"></div>
+        <div class="sucesso" id="mensagemSucesso"></div>
+    </main>
+    <script src="scripts/scripts.js"></script>
+</body>
+
+</html>
