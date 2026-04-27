@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Produtos em destaque carregados via API com cache local e tratamento de erros." />
+  <meta name="keywords" content="html, css, javascript, fetch, api, produtos" />
+  <title>Em destaque - João Vitor Azambuja</title>
+  <link href="style.css" rel="stylesheet" />
+  <script src="scripts.js" defer></script>
+</head>
+<body>
+  <div id="header-container"></div>
+
+  <main class="page-card featured-page">
+    <section class="page-intro">
+      <p class="eyebrow">Exercício de Fetch - Aula 09</p>
+      <h1>Produtos em destaque</h1>
+
+    </section>
+
+    <section class="status-panel" aria-live="polite">
+      <div id="featuredLoading" class="loading-box">Carregando produtos em destaque...</div>
+      <div id="featuredError" class="erro"></div>
+      <div id="featuredEmpty" class="empty-box">Nenhum produto em destaque encontrado.</div>
+    </section>
+
+    <section id="featuredProducts" class="products-grid" aria-label="Lista de produtos em destaque"></section>
+  </main>
+
+  <footer>
+    <p>João Vitor Azambuja</p>
+    <p>109508</p>
+  </footer>
+</body>
+</html>

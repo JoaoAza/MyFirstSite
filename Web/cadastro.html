@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Página de cadastro" />
+  <meta name="keywords" content="cadastro, formulário, validação" />
+  <title>Cadastro - João Vitor Azambuja</title>
+  <link href="style.css" rel="stylesheet" />
+  <script src="scripts.js" defer></script>
+</head>
+<body>
+  <div id="header-container"></div>
+
+  <main class="page-card form-page compact-card">
+    <h1>Cadastro</h1>
+
+    <form onsubmit="enviarForm(event)">
+      <div>
+        <label for="name">Nome Completo</label>
+        <input type="text" id="name" name="name" placeholder="Digite seu nome completo" />
+      </div>
+
+      <div>
+        <label for="phone">Telefone</label>
+        <input type="text" id="phone" name="phone" placeholder="00 00000-0000" />
+      </div>
+
+      <div>
+        <label for="email">Email</label>
+        <input type="text" id="email" name="email" placeholder="Digite seu email" />
+      </div>
+
+      <div>
+        <label for="cep">CEP</label>
+        <input type="text" id="cep" name="cep" placeholder="00000-000" />
+      </div>
+
+      <div>
+        <label for="senha">Senha</label>
+        <input type="password" id="senha" name="senha" placeholder="Digite sua senha" />
+      </div>
+
+      <div>
+        <label for="senhaAlt">Confirmação de Senha</label>
+        <input type="password" id="senhaAlt" name="senhaAlt" placeholder="Digite sua senha novamente" />
+      </div>
+
+      <button type="submit">Cadastrar</button>
+    </form>
+
+    <div class="erro" id="mensagemErro"></div>
+    <div class="sucesso" id="mensagemSucesso"></div>
+  </main>
+
+  <footer>
+    <p>João Vitor Azambuja</p>
+    <p>109508</p>
+  </footer>
+</body>
+</html>
