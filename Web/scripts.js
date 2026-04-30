@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   carregarHeader();
+  carregarFooter();
 });
 
 async function carregarHeader() {
@@ -40,6 +41,52 @@ async function carregarHeader() {
     `;
   }
 }
+
+async function carregarFooter() {
+  const container = document.getElementById("footer-container");
+
+  if (!container) {
+    return;
+  }
+
+  try {
+    const resposta = await fetch("footer.html");
+
+    if (!resposta.ok) {
+      throw new Error("Não foi possível carregar o footer.");
+    }
+
+    container.innerHTML = await resposta.text();
+  } catch (erro) {
+    console.error(erro);
+
+    container.innerHTML = `
+      <footer class="site-footer">
+        <div class="footer-container">
+          <div class="footer-info">
+            <h2>Meu Primeiro Site</h2>
+            <p>Projeto desenvolvido para prática de HTML, CSS e JavaScript.</p>
+          </div>
+
+          <div class="footer-links">
+            <a href="index.html">Início</a>
+            <a href="sobre.html">Sobre</a>
+            <a href="contato.html">Contato</a>
+            <a href="links.html">Links</a>
+            <a href="cadastro.html">Cadastro</a>
+            <a href="destaque.html">Em destaque</a>
+          </div>
+
+          <div class="footer-copy">
+            <p>João Vitor Azambuja</p>
+            <p>109508</p>
+          </div>
+        </div>
+      </footer>
+    `;
+  }
+}
+
 
 function configurarMenuResponsivo() {
   const botao = document.querySelector(".menu-toggle");
