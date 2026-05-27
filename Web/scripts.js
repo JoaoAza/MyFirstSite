@@ -507,3 +507,140 @@ async function carregarProdutosEmDestaque() {
     setLoadingDestaques(false);
   }
 }
+const POSTS_API_URL = "https://api-prog-web.onrender.com/posts";
+
+document.addEventListener("DOMContentLoaded", () => {
+  carregarPublicacoes();
+});
+
+async function carregarPublicacoes() {
+  const postsLoading = document.getElementById("postsLoading");
+  const postsError = document.getElementById("postsError");
+  const postsEmpty = document.getElementById("postsEmpty");
+  const postsList = document.getElementById("postsList");
+
+  if (!postsLoading || !postsError || !postsEmpty || !postsList) {
+    return;
+  }
+
+  postsLoading.style.display = "block";
+  postsError.style.display = "none";
+  postsEmpty.style.display = "none";
+  postsList.innerHTML = "";
+
+  try {
+    const resposta = await fetch(POSTS_API_URL);
+
+    if (!resposta.ok) {
+      throw new Error("Não foi possível carregar as publicações.");
+    }
+
+    const dados = await resposta.json();
+
+    const publicacoes = prepararPublicacoes(dados);
+
+    postsLoading.style.display = "none";
+
+    if (publicacoes.length === 0) {
+      postsEmpty.style.display = "block";
+      return;
+    }
+
+    renderizarPublicacoes(publicacoes, postsList);
+  } catch (erro) {
+    console.error(erro);
+
+    postsLoading.style.display = "none";
+    postsError.style.display = "block";
+    postsError.textContent = erro.message || "Erro ao buscar publicações da API.";
+
+    if (typeof mostrarNotificacao === "function") {
+      mostrarNotificacao("Erro ao carregar publicações da API.", "erro");
+    }
+  }
+}
+
+function prepararPublicacoes(dados) {
+  let lista = [];
+
+  if (Array.isArray(dados)) {
+    lista = dados;
+  } else if (dados && Array.isArray(dados.items)) {
+    lista = dados.items;
+  } else if (dados && Array.isArray(dados.posts)) {
+    lista = dados.posts;
+  }
+
+  return lista
+    .map(normalizarPublicacao)
+    .filter(validarPublicacao);
+}
+
+function normalizarPublicacao(post) {
+  return {
+    id: Number(post.id),
+    titulo: String(post.titulo || "").trim(),
+    conteudo: String(post.conteudo || "").trim(),
+    autor: String(post.autor || "").trim(),
+    criadoEm: String(post.criadoEm || "").trim(),
+    atualizadoEm: String(post.atualizadoEm || "").trim()
+  };
+}
+
+function validarPublicacao(post) {
+  return Boolean(
+    post &&
+    post.id > 0 &&
+    post.titulo !== "" &&
+    post.conteudo !== "" &&
+    post.autor !== "" &&
+    post.criadoEm !== ""
+  );
+}
+
+function renderizarPublicacoes(publicacoes, container) {
+  const html = publicacoes
+    .map((post) => {
+      const dataCriacao = formatarData(post.criadoEm);
+      const dataAtualizacao = post.atualizadoEm ? formatarData(post.atualizadoEm) : null;
+
+      return `
+        <article class="post-card">
+          <div class="post-card-header">
+            <span class="post-id">#${post.id}</span>
+            <span class="post-date">${dataCriacao}</span>
+          </div>
+
+          <h2>${post.titulo}</h2>
+
+          <p class="post-content">${post.conteudo}</p>
+
+          <div class="post-meta">
+            <span>Autor: <strong>${post.autor}</strong></span>
+            ${
+              dataAtualizacao
+                ? `<span>Atualizado em: ${dataAtualizacao}</span>`
+                : ""
+            }
+          </div>
+        </article>
+      `;
+    })
+    .join("");
+
+  container.innerHTML = html;
+}
+
+function formatarData(dataISO) {
+  const data = new Date(dataISO);
+
+  if (isNaN(data.getTime())) {
+    return "Data inválida";
+  }
+
+  return data.toLocaleDateString("pt-BR", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric"
+  });
+}

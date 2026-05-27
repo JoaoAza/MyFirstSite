@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Publicações" />
+  <meta name="keywords" content="publicacoes, posts" />
+  <title>Publicações</title>
+  <link href="style.css" rel="stylesheet" />
+  <script src="scripts.js" defer></script>
+</head>
+
+<body>
+  <div id="header-container"></div>
+
+  <main class="page-card featured-page">
+    <section class="page-intro">
+      <p class="eyebrow">Exercício de API</p>
+      <h1>Publicações</h1>
+
+    </section>
+
+    <section class="status-panel" aria-live="polite">
+      <div id="postsLoading" class="loading-box">Carregando publicações...</div>
+      <div id="postsError" class="erro"></div>
+      <div id="postsEmpty" class="empty-box">Nenhuma publicação encontrada no momento.</div>
+
+      <section id="postsList" class="posts-grid" aria-label="Lista de publicações"></section>
+
+  </main>
+
+  <div id="footer-container"></div>
+
+</body>
+
+</html>
